@@ -17,7 +17,7 @@ even after the server is restarted.
 1. 
 
 ### Running the NodeJS REST service on port 80 using a custom subdomain name (optional):
-Theoretically you could run everything through the NodeJS server. Even serving static files etc. Thus eliminating the need for antoher webserver completely. But the buildt-in Nginx server does offer a lot of flexiblility and ease-of-use that, in NodeJS, would result in a lot of custom code to route everything coming in on port 80 to the correct place. So I'll assume you want to use the standard Nginx webserver in the "Web Station"-package for serving PHP- and static files. We will also be using the Nginx server to route the traffic to the correct NodeJS application based on the requested host-header.
+Theoretically you could run everything through the NodeJS server. Even serving static files etc. Thus eliminating the need for antoher webserver completely. But the buildt-in Nginx server does offer a lot of flexiblility and ease-of-use that, in NodeJS, would require in a lot of custom code to route everything coming in on port 80 to the correct place. So I'll assume you want to use the standard Nginx webserver in the "Web Station"-package for serving PHP- and static files. We will also be using the Nginx server to route the traffic to the correct NodeJS application based on the requested host-header.
 
 1. Install the "Web Station" package. 
 1. Goto Main Menu - "Web Station". 
