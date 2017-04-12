@@ -25,6 +25,7 @@ Theoretically you could run everything through the NodeJS server. Even serving s
     1. In General Settings - make sure you are using HTTP back-end server: "Nginx"
     1. A standard website would be served using the Virtual Host setting
 1. Login via SSH - for example using putty 
-1. If you don't have a domain, or your DNS information has not propagated to your PC you can edit this file: ```C:\Windows\System32\drivers\etc\hosts``` using Notepad in Admin mode. 
+1. If you don't have a domain, or your DNS information has not propagated to your PC you can edit this file: PC: ```C:\Windows\System32\drivers\etc\hosts``` using Notepad in Admin mode. On Mac open a concole and use: ```sudo nano /etc/hosts```
     1. Add a line to the file: ```[SynologyIP] [subdomain.domain.com]```
     1. For example ```192.168.15.32 rest.thierry.com```
+    1. This will enable your local machine to resolve the IP of your Synology NAS as that DNS name.
