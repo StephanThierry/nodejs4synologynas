@@ -24,3 +24,5 @@ Theoretically you could run everything through the NodeJS server. Even serving s
 1. Goto Main Menu - "Web Station". 
     1. In General Settings - make sure you are using HTTP back-end server: "Nginx"
     1. A standard website would be served using the Virtual Host setting
+1. Login via SSH - for example using putty 
+1. If you don't have a domain, or your DNS information has not propagated to your PC you can edit this file: ```C:\Windows\System32\drivers\etc\hosts```
