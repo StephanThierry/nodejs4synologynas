@@ -1,5 +1,5 @@
 # nodejs4synologynas
-Running a REST server on Synology NAS using NodeJS and MariaDB (MySQL)  
+### Running a REST server on Synology NAS using NodeJS and MariaDB (MySQL)  
 `Searchterms: Node.JS service on Synology NAS.`
 
 There are a lot of good resources out there for NodeJS projects, REST services etc. So in this project I will be focusing on all the [yak-shaving](https://en.wiktionary.org/wiki/yak_shaving) that goes into making the whole setup actually work. When everything is running it's up to you to make something useful.    
