@@ -17,13 +17,16 @@ even after the server is restarted.
 1. Using your PC or Mac open the "Server" folder and make a folder called "Node"
 1. Install [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) or similar SSL client to get console access to your NAS
 1. To make a connection test. Make a folder for you project inside your Server folder for example "HelloWorldServer" and add a file called "index.js" containing the Example server provided by "NodeJS Express". For editing JS, i recommend using Visual Studio Code - https://code.visualstudio.com/ 
-```//index.js
+```
+//index.js
 const express = require('express')
 const app = express()
 
 app.get('/', (req, res) => res.send('Hello World!'))
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))```
+app.listen(3000, () => console.log('Example app listening on port 3000!'))
+```
+
 1. Login to you Synology using Putty (or another SSH client) using you admin account
 1. Change to the Server/HelloWorldServer folder - most likely it's called "/Volume1/Server/HelloWorldServer" or somthing similar so the command would be: ```cd /Volume1/Server/HelloWorldServer```
 1. If your Node installation is complete - you should be able to use npm to install the dependienciet.
