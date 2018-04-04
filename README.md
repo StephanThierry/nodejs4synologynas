@@ -40,7 +40,7 @@ app.listen(3000, () => console.log('Example app listening on port 3000!'))
 1. To keep the process runnning we use a Node package called "forever". To install it type ```npm install forever -g``` The -g option installs the package globally - since it's not a dependency of the specific project, but rather a general utility of the server.
 1. We can now type ```forever start index.js``` and the server will keep running even after we exit the SSH process.
 
-### Restart the NodeJS server after each restart
+### Restart the NodeJS server after each restart (recommended)
 It's possible to access the server manually each time we restart or update, but ideally we would like to be able to restart and update and have our Node server start up along side everything else.
 1. Create a file called ```nodeserverstart.sh``` with the content:
 ```
