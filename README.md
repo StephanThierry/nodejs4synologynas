@@ -8,8 +8,8 @@ The purpose of this project is to explain all the steps to get NodeJS up and run
 even after the server is restarted.
 
 1. Start by logging into DSM and going to Package Manager  
-    1. Install the "Node.js v8" package (or whichever is the lateste at the time)  
-    1. Install the "MariaDB" package
+    1. Install the "Node.js v8" package or whichever is the lateste at the time. (Located under "Developer Tools")
+    1. Install the "MariaDB" package, any version shold be fine.  (Located under "Utilities")
     
 1. Still in DSM. Goto Control Panel, and in the File Sharing section select "Shared Folder".
 1. Create a new folder named "Server". You can call it anything you'd like (or use an existing folder) but for the sake of this project I'll assume you are using the "Server" folder.
