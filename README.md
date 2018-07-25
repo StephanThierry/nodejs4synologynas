@@ -14,7 +14,7 @@ even after the server is restarted.
 1. Still in DSM. Goto Control Panel, and in the File Sharing section select "Shared Folder".
 1. Create a new folder named "server". You can call it anything you'd like (or use an existing folder) but for the sake of this project I'll assume you are using the "server" folder.
 1. In Control Panel, Goto "Terminal & SNMP". Make sure "Enable SSH service" is checked. We need SSH access later in this guide, but you can turn it off after everything is done.
-1. Using your PC or Mac open the "server" folder and make a folder called "Node"
+1. Using your PC or Mac open the "server" folder and make a folder called "HelloWorldServer"
 1. Install [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) or similar SSL client to get console access to your NAS
 1. To make a connection test. Make a folder for you project inside your server folder for example "HelloWorldServer" and add a file called "index.js" containing the example server provided by "NodeJS Express" (pasted in below). For editing JS, i recommend using Visual Studio Code - https://code.visualstudio.com/ 
 1. VS Code can create files directly from the commandline - so if you are in the correct folder, running `code index.js` will create the file and start the editor in one go.
