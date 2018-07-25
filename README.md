@@ -2,21 +2,22 @@
 ### Running a REST server on Synology NAS using Node.js and MariaDB (MySQL)  
 `Searchterms: NodeJS service on Synology NAS.`
 
-There are a lot of good resources out there for Node.js serivices that do just about anything. So in this project I will be focusing on all the [yak-shaving](https://en.wiktionary.org/wiki/yak_shaving) that goes into making the whole setup actually work. When everything is running it's up to you to make something useful.    
+There are a lot of good resources out there for Node.js services that do just about anything. So in this project I will be focusing on all the [yak-shaving](https://en.wiktionary.org/wiki/yak_shaving) that goes into making the whole setup actually work. When everything is running it's up to you to make something useful. This guide should work on most Synology NAS servers from the smallest ones with ARM processer and 512MB RAM to the large versions with Intel CPU and +4GB RAM.
 
 The purpose of this project is to explain all the steps to get NodeJS up and running on your Synology NAS and to keep it running
 even after the server is restarted.
 
 1. Start by logging into DSM and going to Package Manager  
-    1. Install the "Node.js v8" package or whichever is the lateste at the time. (Located under "Developer Tools")
-    1. Install the "MariaDB" package, any version shold be fine.  (Located under "Utilities")
+    1. Install the "Node.js v8" package or whichever is the lateste at the time. (It might be located under "Developer Tools")
+    1. Install the "MariaDB" package, any version shold be fine, just be aware that version 5 uses the default MySQL port (3306) and version 10 uses 3307. So when using v10, you'll need to specify the port on all connections.  (Located under "Utilities")
     
 1. Still in DSM. Goto Control Panel, and in the File Sharing section select "Shared Folder".
-1. Create a new folder named "Server". You can call it anything you'd like (or use an existing folder) but for the sake of this project I'll assume you are using the "Server" folder.
+1. Create a new folder named "server". You can call it anything you'd like (or use an existing folder) but for the sake of this project I'll assume you are using the "server" folder.
 1. In Control Panel, Goto "Terminal & SNMP". Make sure "Enable SSH service" is checked. We need SSH access later in this guide, but you can turn it off after everything is done.
-1. Using your PC or Mac open the "Server" folder and make a folder called "Node"
+1. Using your PC or Mac open the "server" folder and make a folder called "Node"
 1. Install [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) or similar SSL client to get console access to your NAS
-1. To make a connection test. Make a folder for you project inside your Server folder for example "HelloWorldServer" and add a file called "index.js" containing the Example server provided by "NodeJS Express". For editing JS, i recommend using Visual Studio Code - https://code.visualstudio.com/ 
+1. To make a connection test. Make a folder for you project inside your server folder for example "HelloWorldServer" and add a file called "index.js" containing the example server provided by "NodeJS Express" (pasted in below). For editing JS, i recommend using Visual Studio Code - https://code.visualstudio.com/ 
+1. VS Code can create files directly from the commandline - so if you are in the correct folder, running `code index.js` will create the file and start the editor in one go.
 ```
 //index.js
 const express = require('express')
@@ -27,11 +28,12 @@ app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 ```
 
+
 1. Login to you Synology using Putty (or another SSH client) using you admin account
-1. Change to the Server/HelloWorldServer folder - most likely it's called "/Volume1/Server/HelloWorldServer" or somthing similar so the command would be: ```cd /Volume1/Server/HelloWorldServer```
-1. If your Node installation is complete - you should be able to use npm to install the dependienciet.
+1. Change to the Server/HelloWorldServer folder - most likely it's called "/volume1/server/HelloWorldServer" or somthing similar so the command would be: ```cd /volume1/server/HelloWorldServer```
+1. If your Node installation is complete - you should be able to use npm to install the dependiencies.
 1. Type the commands: ```npm init``` - to init the project. ```npm install express --save``` to install and save the Express server dependency
-1. Start the NodeJS project: ```node .``` (Using . will assume "index.js" to be the default entrypoint file)
+1. Start the NodeJS project: ```node .``` (Using . will start the default start-document "index.js")
 1. You should see a message saying "Example app listening on port 3000!"
 1. In your browser you should now be able to access the app using the URL: ```http://[ip-of-your-NAS]:3000``` (3000 being the Port your Express server is listening to) 
 
@@ -39,16 +41,40 @@ app.listen(3000, () => console.log('Example app listening on port 3000!'))
 1. When you exit the Node process by pressing CTRL+C or exiting the SSH client, you will notice the website goes offline. We will need to keep the process running in the background. 
 1. To keep the process runnning we use a Node package called "forever". To install it type ```npm install forever -g``` The -g option installs the package globally - since it's not a dependency of the specific project, but rather a general utility of the server.
 1. We can now type ```forever start index.js``` and the server will keep running even after we exit the SSH process.
+1. If you are getting an error: `bash: forever: command not found` check that forever is installed with the "-g" (global) option
+1. If you have installed forever globally, and you are still seeing this error. Edit the `/etc/profile` file and add the full path to the forever binary to the PATH statement in you boot-profile. You can use the built-in editor "vim". `sudo vim /etc/profile`  
+1. Alternatively, for general filemanagement and editing I recommend installing and using "Midnight Commander" from https://synocommunity.com/, when it's installed start it using ```sudo mc```.
 
-### Restart the NodeJS server after each restart (recommended)
+### Restart the NodeJS server after each NAS restart (recommended)
 It's possible to access the server manually each time we restart or update, but ideally we would like to be able to restart and update and have our Node server start up along side everything else.
-1. Create a file called ```nodeserverstart.sh``` with the content:
+1. Create a file in `/volume1/server` called ```nodeserverstart.sh``` with the content:
 ```
-TBA
+#!/bin/sh
+PATH=$PATH:/volume1/@appstore/Node.js_v8/usr/local/lib/node_modules/forever/bin
+
+start() {
+        forever start /volume1/server/HelloWorldServer -l /volume1/server/HelloWorldServer/logs/log.txt  -o /volume1/server/HelloWorldServer/logs/output.txt
+}
+
+stop() {
+        killall -9 node
+}
+
+case "$1" in
+  start)
+    start
+    ;;
+  stop)
+    stop
+    ;;
+  *)
+    echo "Usage: $0 {start|stop}"
+
 ```
-1. Run the command ```chmod TBA``` to make the script executable. 
-1. Copy this file into the folder ```TBA```
-1. You should now be able to restart your server andthe  bootscript will make sure the service is started.
+1. Check the "PATH" statement in the above script and make sure the binaries of your version of "forever" is in that folder. It might change depending on you version of Node or forever. Correct it if it is not accurate.  
+1. Copy this file into the folder ```/usr/local/etc/rc.d``` using the command `sudo cp /volume1/server/nodeserverstart.sh /usr/local/etc/rc.d`
+1. Run the command ```sudo chmod +x /usr/local/etc/rc.d/nodeserverstart.sh``` to make the script executable. 
+1. You should now be able to restart your server and the bootscript will make sure the service is started.
 
 ### Running the NodeJS REST service on port 80 using a custom subdomain name (optional):
 Theoretically you could run everything through the NodeJS server. Even serving static files etc. Thus eliminating the need for antoher webserver completely. But the buildt-in Nginx server does offer a lot of flexiblility and ease-of-use that, in NodeJS, would require in a lot of custom code to route everything coming in on port 80 to the correct place. So I'll assume you want to use the standard Nginx webserver in the "Web Station"-package for serving PHP- and static files. We will also be using the Nginx server to route the traffic to the correct NodeJS application based on the requested host-header.
