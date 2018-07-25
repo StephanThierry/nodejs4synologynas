@@ -39,7 +39,7 @@ app.listen(3000, () => console.log('Example app listening on port 3000!'))
 ### To keep the process running independent of the SSH client  
 1. When you exit the Node process by pressing CTRL+C or closing the SSH client, you will notice the website goes offline. We will need to keep the process running in the background. 
 1. To keep the process runnning we use a Node package called "forever". To install it type ```npm install forever -g``` The -g option installs the package globally - since it's not a dependency of the specific project, but rather a general utility we need on the server.
-1. We can now type ```forever start index.js``` and the server will keep running even after we exit the SSH process.
+1. We can now type ```sudo forever start index.js``` and the server will keep running even after we exit the SSH process.
 1. If you are getting an error: `bash: forever: command not found` check that forever is installed with the "-g" (global) option
 1. If you have installed forever globally, and you are still seeing this error. Edit the `/etc/profile` file and add the full path to the forever binary to the PATH statement in you boot-profile. You can use the built-in editor "vim". `sudo vim /etc/profile`  
 1. For me the "forever"-binary was located in `/volume1/@appstore/Node.js_v8/usr/local/lib/node_modules/forever/bin` it might be different for you. You will need to close you shell and re-open it to use the changes in the PATH variable.
@@ -76,6 +76,11 @@ case "$1" in
 1. Using the command `sudo cp /volume1/server/nodeserverstart.sh /usr/local/etc/rc.d` will copy the script.
 1. Run the command ```sudo chmod +x /usr/local/etc/rc.d/nodeserverstart.sh``` to make the script executable, otherwise it won't actually be executed. 
 1. You should now be able to restart your server and the bootscript will make sure the service is started.
+
+### Stopping Node
+When developing your NodeJS application you will often need to make changes, thus stopping and starting the service. The easiest is to keep the Node process in the shell so you can close it easily. But if you need to stop a "forever"-Node process it should be enough to run `sudo forever stopall`  but that might not always be the case. Sometimes you need to use a more drastic appraoch and use the command `sudo killall -9 node` to be sure all node-processes are stopped.  
+
+A good indication that a process is still running in the background is the error `EADDRINUSE`. Which indicated that the system still thinks there is a process listening to the specified port.  
 
 ### Running the NodeJS REST service on port 80 using a custom subdomain name (optional):
 Theoretically you could run everything through the NodeJS server. Even serving static files etc. Thus eliminating the need for another webserver completely. But the built-in Nginx server does offer a lot of flexiblility and ease-of-use that, in NodeJS, would require in a lot of custom code to route everything coming in on port 80 to the correct place. So I'll assume you want to use the standard Nginx webserver in the "Web Station"-package for serving PHP- and static files. We will also be using the Nginx server to route the traffic to the correct NodeJS application based on the requested host-header.
