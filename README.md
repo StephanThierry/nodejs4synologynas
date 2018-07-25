@@ -16,10 +16,10 @@ even after the server is restarted.
 1. In Control Panel, Goto "Terminal & SNMP". Make sure "Enable SSH service" is checked. We need SSH access later in this guide, but you can turn it off after everything is done.
 1. Using your PC or Mac open the "server" folder and make a folder called "HelloWorldServer"
 1. Install [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) or similar SSL client to get console access to your NAS
-1. To make a connection test. Make a folder for you project inside your server folder for example "HelloWorldServer" and add a file called "index.js" containing the example server provided by "NodeJS Express" (pasted in below). For editing JS, i recommend using Visual Studio Code - https://code.visualstudio.com/ 
+1. To make a connection test application, add a file called "index.js" containing the example server provided by "NodeJS Express" (pasted in below). https://expressjs.com/en/starter/hello-world.html 
+1. For editing JS, i recommend using Visual Studio Code - https://code.visualstudio.com/ 
 1. VS Code can create files directly from the commandline - so if you are in the correct folder, running `code index.js` will create the file and start the editor in one go.
 ```
-//index.js
 const express = require('express')
 const app = express()
 
@@ -28,22 +28,22 @@ app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 ```
 
-
 1. Login to you Synology using Putty (or another SSH client) using you admin account
-1. Change to the Server/HelloWorldServer folder - most likely it's called "/volume1/server/HelloWorldServer" or somthing similar so the command would be: ```cd /volume1/server/HelloWorldServer```
+1. Change to the Server/HelloWorldServer folder - most likely it's called "/volume1/server/HelloWorldServer" or something similar, so the command would be: ```cd /volume1/server/HelloWorldServer```
 1. If your Node installation is complete - you should be able to use npm to install the dependiencies.
-1. Type the commands: ```npm init``` - to init the project. ```npm install express --save``` to install and save the Express server dependency
-1. Start the NodeJS project: ```node .``` (Using . will start the default start-document "index.js")
+1. Type the commands: ```npm init --yes``` - to init the project with all default values. ```npm install express --save``` to install and save the Express server dependency
+1. Start the NodeJS project: ```node .``` (Using . will execute the default start-document "index.js")
 1. You should see a message saying "Example app listening on port 3000!"
 1. In your browser you should now be able to access the app using the URL: ```http://[ip-of-your-NAS]:3000``` (3000 being the Port your Express server is listening to) 
 
 ### To keep the process running independent of the SSH client  
-1. When you exit the Node process by pressing CTRL+C or exiting the SSH client, you will notice the website goes offline. We will need to keep the process running in the background. 
-1. To keep the process runnning we use a Node package called "forever". To install it type ```npm install forever -g``` The -g option installs the package globally - since it's not a dependency of the specific project, but rather a general utility of the server.
+1. When you exit the Node process by pressing CTRL+C or closing the SSH client, you will notice the website goes offline. We will need to keep the process running in the background. 
+1. To keep the process runnning we use a Node package called "forever". To install it type ```npm install forever -g``` The -g option installs the package globally - since it's not a dependency of the specific project, but rather a general utility we need on the server.
 1. We can now type ```forever start index.js``` and the server will keep running even after we exit the SSH process.
 1. If you are getting an error: `bash: forever: command not found` check that forever is installed with the "-g" (global) option
 1. If you have installed forever globally, and you are still seeing this error. Edit the `/etc/profile` file and add the full path to the forever binary to the PATH statement in you boot-profile. You can use the built-in editor "vim". `sudo vim /etc/profile`  
-1. Alternatively, for general filemanagement and editing I recommend installing and using "Midnight Commander" from https://synocommunity.com/, when it's installed start it using ```sudo mc```.
+1. For me the "forever"-binary was located in `/volume1/@appstore/Node.js_v8/usr/local/lib/node_modules/forever/bin` it might be different for you. You will need to close you shell and re-open it to use the changes in the PATH variable.
+1. For general filemanagement and editing I recommend installing and using "Midnight Commander" from https://synocommunity.com/. (Installation instructions are on the site) When it's installed start it using ```sudo mc```.
 
 ### Restart the NodeJS server after each NAS restart (recommended)
 It's possible to access the server manually each time we restart or update, but ideally we would like to be able to restart and update and have our Node server start up along side everything else.
@@ -72,14 +72,15 @@ case "$1" in
 
 ```
 1. Check the "PATH" statement in the above script and make sure the binaries of your version of "forever" is in that folder. It might change depending on you version of Node or forever. Correct it if it is not accurate.  
-1. Copy this file into the folder ```/usr/local/etc/rc.d``` using the command `sudo cp /volume1/server/nodeserverstart.sh /usr/local/etc/rc.d`
-1. Run the command ```sudo chmod +x /usr/local/etc/rc.d/nodeserverstart.sh``` to make the script executable. 
+1. Copy this file into the folder ```/usr/local/etc/rc.d``` "rc.d" means run commands directory, and contains customs scrips that will be executed with "start" parameter af boot and "stop" parameter at shutdown.
+1. Using the command `sudo cp /volume1/server/nodeserverstart.sh /usr/local/etc/rc.d` will copy the script.
+1. Run the command ```sudo chmod +x /usr/local/etc/rc.d/nodeserverstart.sh``` to make the script executable, otherwise it won't actually be executed. 
 1. You should now be able to restart your server and the bootscript will make sure the service is started.
 
 ### Running the NodeJS REST service on port 80 using a custom subdomain name (optional):
-Theoretically you could run everything through the NodeJS server. Even serving static files etc. Thus eliminating the need for antoher webserver completely. But the buildt-in Nginx server does offer a lot of flexiblility and ease-of-use that, in NodeJS, would require in a lot of custom code to route everything coming in on port 80 to the correct place. So I'll assume you want to use the standard Nginx webserver in the "Web Station"-package for serving PHP- and static files. We will also be using the Nginx server to route the traffic to the correct NodeJS application based on the requested host-header.
+Theoretically you could run everything through the NodeJS server. Even serving static files etc. Thus eliminating the need for another webserver completely. But the built-in Nginx server does offer a lot of flexiblility and ease-of-use that, in NodeJS, would require in a lot of custom code to route everything coming in on port 80 to the correct place. So I'll assume you want to use the standard Nginx webserver in the "Web Station"-package for serving PHP- and static files. We will also be using the Nginx server to route the traffic to the correct NodeJS application based on the requested host-header.
 
-1. If you don't have a domain, or your DNS information has not propagated to your PC you can edit this file: PC: ```C:\Windows\System32\drivers\etc\hosts``` using Notepad in Admin mode. On Mac open a concole and use: ```sudo nano /etc/hosts```
+1. If you don't have a domain, or your DNS information has not propagated to the external IP of your PC, you can edit this file: PC: ```C:\Windows\System32\drivers\etc\hosts``` using Notepad in Admin mode. On Mac open a concole and use: ```sudo nano /etc/hosts```
     1. Add a line to the file: ```[SynologyIP] [subdomain.domain.com]```
     1. For example ```192.168.15.32 rest.thierry.com```
     1. This will enable your local machine to resolve the IP of your Synology NAS as that DNS name.
@@ -94,3 +95,5 @@ Theoretically you could run everything through the NodeJS server. Even serving s
     1. This config will route all Port 80 traffice (default http port) sent to your source hostname to port 3000 of the NAS
     1. You can not enter in your browser the URL: ```http://rest.thierry.com``` and acceess the HelloWorld Server running on port 3000.
     
+### Next step
+Well, now you have a stable HelloWorld application and a database (that doesn't do anything). You can go on to all the great articles about how to program NodeJS services like this one: https://medium.com/@avanthikameenakshi/building-restful-api-with-nodejs-and-mysql-in-10-min-ff740043d4be 
