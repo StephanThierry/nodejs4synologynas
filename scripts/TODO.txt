@@ -1,0 +1,8 @@
+# Copy start-script to the "run commands"-directory (first check PATH setting!)
+sudo cp nodeserverstart.sh /usr/local/etc/rc.d
+
+# Make start-script executable
+sudo chmod +x /usr/local/etc/rc.d/nodeserverstart.sh
+
+# Envoke script manually first time
+sudo /usr/local/etc/rc.d/nodeserverstart.sh start
