@@ -8,8 +8,8 @@ The purpose of this project is to explain all the steps to get NodeJS up and run
 even after the server is restarted.
 
 1. Start by logging into DSM and going to Package Manager  
-    1. Install the "Node.js v8" package or whichever is the lateste at the time. (It might be located under "Developer Tools")
-    1. Install the "MariaDB" package, any version shold be fine, just be aware that version 5 uses the default MySQL port (3306) and version 10 uses 3307. So when using v10, you'll need to specify the port on all connections.  (Located under "Utilities")
+    1. Install the "Node.js v8" package or whichever is the lateste at the time. (On older version of DSM it might be located under "Developer Tools", the latest version just has an "All packages" tab.)
+    1. Install the "MariaDB" package, any version shold be fine, just be aware that version 5 uses the default MySQL port (3306) and version 10 uses 3307. So when using v10, you'll need to specify the port on all connections.  (Used to be under "Utilities")
     
 1. Still in DSM. Goto Control Panel, and in the File Sharing section select "Shared Folder".
 1. Create a new folder named "server". You can call it anything you'd like (or use an existing folder) but for the sake of this project I'll assume you are using the "server" folder.
@@ -17,7 +17,7 @@ even after the server is restarted.
 1. Using your PC or Mac open the "server" folder and make a folder called "HelloWorldServer"
 1. Install [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) or similar SSL client to get console access to your NAS
 1. To make a connection test application, add a file called "index.js" containing the example server provided by "NodeJS Express" (pasted in below). https://expressjs.com/en/starter/hello-world.html 
-1. For editing JS, i recommend using Visual Studio Code - https://code.visualstudio.com/ 
+1. For editing JS, I recommend using Visual Studio Code - https://code.visualstudio.com/ 
 1. VS Code can create files directly from the commandline - so if you are in the correct folder, running `code index.js` will create the file and start the editor in one go.
 ```
 const express = require('express')
@@ -28,7 +28,7 @@ app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 ```
 
-1. Login to you Synology using Putty (or another SSH client) using you admin account
+1. Login to a command-shell on your Synology using Putty (or another SSH client - if you are on a Mac there is one built into the Terminal app) using you admin account
 1. Change to the Server/HelloWorldServer folder - most likely it's called "/volume1/server/HelloWorldServer" or something similar, so the command would be: ```cd /volume1/server/HelloWorldServer```
 1. If your Node installation is complete - you should be able to use npm to install the dependiencies.
 1. Type the commands: ```npm init --yes``` - to init the project with all default values. ```npm install express --save``` to install and save the Express server dependency
@@ -71,8 +71,8 @@ case "$1" in
     echo "Usage: $0 {start|stop}"
 
 ```
-1. Check the "PATH" statement in the above script and make sure the binaries of your version of "forever" is in that folder. It might change depending on you version of Node or forever. Correct it if it is not accurate.  
-1. Copy this file into the folder ```/usr/local/etc/rc.d``` "rc.d" means run commands directory, and contains customs scrips that will be executed with "start" parameter af boot and "stop" parameter at shutdown.
+1. Check the "PATH" statement in the above script and make sure the binaries of your version of "forever" is in that folder. It might change depending on you version of Node or forever. Correct it, if it is not accurate.  
+1. Copy this file into the folder ```/usr/local/etc/rc.d``` "rc.d" means run commands directory, and contains customs scrips that will be executed with a "start" parameter at boot and a "stop" parameter at shutdown of the NAS.
 1. Using the command `sudo cp /volume1/server/nodeserverstart.sh /usr/local/etc/rc.d` will copy the script.
 1. Run the command ```sudo chmod +x /usr/local/etc/rc.d/nodeserverstart.sh``` to make the script executable, otherwise it won't actually be executed. 
 1. You should now be able to restart your server and the bootscript will make sure the service is started.
@@ -96,9 +96,9 @@ Theoretically you could run everything through the NodeJS server. Even serving s
 1.    Click Create and fill in the form. 
     1. Description: Any description you'd like, 
     1. Source: Your desired hostname (see above) f.x. ```http://rest.thierry.com```
-    1. Destination ```http://localhost:3000``` this is the target your host address will be pointing to. Localhost is the name of the NAS itself, :3000 is the port your application is listening to.
-    1. This config will route all Port 80 traffice (default http port) sent to your source hostname to port 3000 of the NAS
-    1. You can not enter in your browser the URL: ```http://rest.thierry.com``` and acceess the HelloWorld Server running on port 3000.
+    1. Destination ```http://localhost:3000``` this is the target your host address will be pointing to. Localhost is the name of the NAS itself, :3000 is the port your Node server application is listening to.
+    1. This config will re-route all Port 80 traffic (default http port) sent to your source hostname to port 3000 of the NAS
+    1. You can now enter the URL: ```http://rest.thierry.com``` in your browser and acceess the HelloWorldServer running on port 3000.
     
 ### Next step
 Well, now you have a stable HelloWorld server, you can update and restart your server without killing your appliction - and an empty database service (that doesn't do anything). You can go on to all the great articles about how to program NodeJS services like this one: https://medium.com/@avanthikameenakshi/building-restful-api-with-nodejs-and-mysql-in-10-min-ff740043d4be 
