@@ -102,3 +102,7 @@ Theoretically you could run everything through the NodeJS server. Even serving s
     
 ### Next step
 Well, now you have a stable HelloWorld server, you can update and restart your server without killing your appliction - and an empty database service (that doesn't do anything). You can go on to all the great articles about how to program NodeJS services like this one: https://medium.com/@avanthikameenakshi/building-restful-api-with-nodejs-and-mysql-in-10-min-ff740043d4be 
+
+
+### Are you new to NodeJS
+If you've gotten this far, then probably not. But just in case, check out my very basic tutorial project: https://github.com/StephanThierry/node-tutorialgallery that explains some of the basic concepts of setting a NodeJS server inside a functioning (ugly) app.  
