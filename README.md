@@ -28,7 +28,7 @@ app.get('/', (req, res) => res.send('Hello World!'))
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
 ```
 
-1. Login to a command-shell on your Synology using Putty (or another SSH client - if you are on a Mac there is one built into the Terminal app) using you admin account
+1. Login to a command-shell on your Synology using Putty (or another SSH client - if you are on a Mac there is one built into the Terminal app) using your admin account
 1. Change to the Server/HelloWorldServer folder - most likely it's called "/volume1/server/HelloWorldServer" or something similar, so the command would be: ```cd /volume1/server/HelloWorldServer```
 1. If your Node installation is complete - you should be able to use npm to install the dependiencies.
 1. Type the commands: ```npm init --yes``` - to init the project with all default values. ```npm install express --save``` to install and save the Express server dependency
@@ -85,10 +85,10 @@ A good indication that a process is still running in the background is the error
 ### Running the NodeJS REST service on port 80 using a custom subdomain name (optional):
 Theoretically you could run everything through the NodeJS server. Even serving static files etc. Thus eliminating the need for another webserver completely. But the built-in Nginx server does offer a lot of flexiblility and ease-of-use that, in NodeJS, would require in a lot of custom code to route everything coming in on port 80 to the correct place. So I'll assume you want to use the standard Nginx webserver in the "Web Station"-package for serving PHP- and static files. We will also be using the Nginx server to route the traffic to the correct NodeJS application based on the requested host-header.
 
-1. If you don't have a domain, or your DNS information has not propagated to the external IP of your PC, you can edit this file: PC: ```C:\Windows\System32\drivers\etc\hosts``` using Notepad in Admin mode. On Mac open a concole and use: ```sudo nano /etc/hosts```
+1. If you don't have a domain, or your DNS information has not yet propagated, you can edit this file: PC: ```C:\Windows\System32\drivers\etc\hosts``` using Notepad in Admin mode (or just use VS Code). On Mac open a concole and use: ```sudo nano /etc/hosts```
     1. Add a line to the file: ```[SynologyIP] [subdomain.domain.com]```
     1. For example ```192.168.15.32 rest.thierry.com```
-    1. This will enable your local machine to resolve the IP of your Synology NAS as that DNS name.
+    1. This will enable your local machine to resolve the IP of your Synology NAS using that DNS name.
 1. Install the "Web Station" package. 
 1. Goto Main Menu - "Web Station". 
     1. In General Settings - make sure you are using HTTP back-end server: "Nginx"
@@ -105,4 +105,4 @@ Well, now you have a stable HelloWorld server, you can update and restart your s
 
 
 ### Are you new to NodeJS
-If you've gotten this far, then probably not. But just in case, check out my very basic tutorial project: https://github.com/StephanThierry/node-tutorialgallery that explains some of the basic concepts of setting a NodeJS server inside a functioning (ugly) app.  
+If you've gotten this far, then probably not. But just in case, check out my very basic tutorial project: https://github.com/StephanThierry/node-tutorialgallery that explains some of the basic concepts of setting a NodeJS server inside a functioning (ugly) app. Don't use this project for it's amazing features, but for the comments that go with each line of the server application, explaining what they do and why. 
