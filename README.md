@@ -1,8 +1,8 @@
 # nodejs4synologynas
 ### Running a REST server on Synology NAS using Node.js and MariaDB (MySQL)  
-`Searchterms: NodeJS service on Synology NAS.`
+`Searchterms: NodeJS service on Synology NAS, Running Node.JS on Synology NAS.`
 
-There are a lot of good resources out there for Node.js services that do just about anything. So in this project I will be focusing on all the [yak-shaving](https://en.wiktionary.org/wiki/yak_shaving) that goes into making the whole setup actually work. When everything is running it's up to you to make something useful. This guide should work on most Synology NAS servers from the smallest ones with ARM processer and 512MB RAM to the large versions with Intel CPU and +4GB RAM.
+There are a lot of good resources out there for Node.js services that do just about anything. So in this project I will be focusing on all the [yak-shaving](https://en.wiktionary.org/wiki/yak_shaving) that goes into making the whole setup actually work. When everything is running it's up to you to make something useful. This guide should work on most Synology NAS servers from the smallest ones with an ARM processer and 512MB RAM like the DS214se, to the larger versions with Intel CPU and +4GB RAM like the DS918+. 
 
 The purpose of this project is to explain all the steps to get NodeJS up and running on your Synology NAS and to keep it running
 even after the server is restarted.
