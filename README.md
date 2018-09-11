@@ -93,12 +93,12 @@ Theoretically you could run everything through the NodeJS server. Even serving s
 1. Goto Main Menu - "Web Station". 
     1. In General Settings - make sure you are using HTTP back-end server: "Nginx"
 1. A standard website would be served using the Virtual Host setting in the Webserver, but your NodeJS services should be configured using the "Reverse proxy" settings in "Control Panel > Application Portal > Reverse Proxy"
-1.    Click Create and fill in the form. 
-    1. Description: Any description you'd like, 
-    1. Source: Your desired hostname (see above) f.x. ```http://rest.thierry.com```
-    1. Destination ```http://localhost:3000``` this is the target your host address will be pointing to. Localhost is the name of the NAS itself, :3000 is the port your Node server application is listening to.
-    1. This config will re-route all Port 80 traffic (default http port) sent to your source hostname to port 3000 of the NAS
-    1. You can now enter the URL: ```http://rest.thierry.com``` in your browser and acceess the HelloWorldServer running on port 3000.
+1.    Click Create and fill in the form.   
+    0. Description: Any description you'd like,   
+    0. Source: Your desired hostname (see above) f.x. ```http://rest.thierry.com```  
+    0. Destination ```http://localhost:3000``` this is the target your host address will be pointing to. Localhost is the name of the NAS itself, :3000 is the port your Node server application is listening to.  
+    0. This config will re-route all Port 80 traffic (default http port) sent to your source hostname to port 3000 of the NAS  
+    0. You can now enter the URL: ```http://rest.thierry.com``` in your browser and acceess the HelloWorldServer running on port 3000.  
     
 ### Next step
 Well, now you have a stable HelloWorld server, you can update and restart your server without killing your appliction - and an empty database service (that doesn't do anything). You can go on to all the great articles about how to program NodeJS services like this one: https://medium.com/@avanthikameenakshi/building-restful-api-with-nodejs-and-mysql-in-10-min-ff740043d4be 
