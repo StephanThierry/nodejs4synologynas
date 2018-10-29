@@ -101,7 +101,7 @@ Theoretically you could run everything through the NodeJS server. Even serving s
     * You can now enter the URL: ```http://rest.thierry.com``` in your browser and acceess the HelloWorldServer running on port 3000.  
     
 ### Next step
-Well, now you have a stable HelloWorld server, you can update and restart your server without killing your appliction - and an empty database service (that doesn't do anything). You can go on to all the great articles about how to program NodeJS services like this one: https://medium.com/@avanthikameenakshi/building-restful-api-with-nodejs-and-mysql-in-10-min-ff740043d4be 
+Well, now you have a stable HelloWorld server running, you can update and restart your server without killing your appliction - and a MySQL database service with no databases (that doesn't do anything yet). You can go on to all the great articles about how to program NodeJS services like this one by Avanthika Meenakshi: https://medium.com/@avanthikameenakshi/building-restful-api-with-nodejs-and-mysql-in-10-min-ff740043d4be 
 
 
 ### Are you new to NodeJS
