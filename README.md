@@ -83,7 +83,7 @@ case "$1" in
 Instead of using one script to take care of both stop and start - and relying on the Linux automation of the `rc.d` folder it's possible to use the Synology "Control Panel -> Task Scheduler" 
 
 
-1. Create the script ´nodeserverstart.sh´ below and place it in a folder for example: ´/volume1/server/autorun/´    
+1. Create the script `nodeserverstart.sh` below and place it in a folder for example: `/volume1/server/autorun/`    
 ```shell
 #!/bin/sh
 PATH=$PATH:/volume1/@appstore/Node.js_v8/usr/local/lib/node_modules/forever/bin
@@ -91,7 +91,7 @@ PATH=$PATH:/volume1/@appstore/Node.js_v8/usr/local/lib/node_modules/forever/bin
 forever start /volume1/server/HelloWorldServer -l /volume1/server/HelloWorldServer/logs/log.txt  -o /volume1/server/HelloWorldServer/logs/output.txt
 ```
 
-1. Then, create the script ´nodeserverstop.sh´ below and place it in a folder for example: ´/volume1/server/autorun/´    
+1. Then, create the script `nodeserverstop.sh` below and place it in a folder for example: `/volume1/server/autorun/`    
 
 ```shell
 #!/bin/sh
@@ -100,10 +100,10 @@ killall -9 node
 ```
 
 1. Login into DSM and goto  "Control Panel -> Task Scheduler"  
-1. Create -> Triggered Task (User:root, Event:Boot-up)
+1. Create -> Triggered Task (User:root, Event:Boot-up)  
    *. Run command: `sh /volume1/server/autorun/nodeserverstart.sh`  
 
-1. Create -> Triggered Task (User:root, Event:Shutdown)
+1. Create -> Triggered Task (User:root, Event:Shutdown)  
    *. Run command: `sh /volume1/server/autorun/nodeserverstop.sh`
 
 This has the added benefit of being able to start/stop the Node server via the DSM GUI.
