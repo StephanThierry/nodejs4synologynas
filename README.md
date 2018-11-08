@@ -101,10 +101,10 @@ killall -9 node
 
 1. Login into DSM and goto  "Control Panel -> Task Scheduler"  
 1. Create -> Triggered Task (User:root, Event:Boot-up)
-   *. Run command : `sh /volume1/server/autorun/nodeserverstart.sh`  
+   *. Run command: `sh /volume1/server/autorun/nodeserverstart.sh`  
 
 1. Create -> Triggered Task (User:root, Event:Shutdown)
-   *. Run command : `sh /volume1/server/autorun/nodeserverstop.sh`
+   *. Run command: `sh /volume1/server/autorun/nodeserverstop.sh`
 
 This has the added benefit of being able to start/stop the Node server via the DSM GUI.
 
