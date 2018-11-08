@@ -4,7 +4,7 @@
 
 There are a lot of good resources out there for Node.js services that do just about anything. So in this project I will be focusing on all the [yak-shaving](https://en.wiktionary.org/wiki/yak_shaving) that goes into making the whole setup actually work. When everything is running it's up to you to make something useful. This guide should work on most Synology NAS servers from the smallest ones with an old ARM processer and 512MB RAM like the DS214se, to the larger versions with a newer Intel CPU and +4GB RAM like the DS918+. 
 
-The purpose of this project is to explain all the steps to get NodeJS up and running on your Synology NAS and to keep it running
+The purpose of this project is to explain all the steps to get Node.js up and running on your Synology NAS and to keep it running
 even after the server is restarted.
 
 1. Start by logging into DSM and going to Package Manager  
@@ -16,7 +16,7 @@ even after the server is restarted.
 1. In Control Panel, Goto "Terminal & SNMP". Make sure "Enable SSH service" is checked. We need SSH access later in this guide, but you can turn it off after everything is done.
 1. Using your PC or Mac open the "server" folder and make a folder called "HelloWorldServer"
 1. Install [Putty](http://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html) or similar SSL client to get console access to your NAS
-1. To make a connection test application, add a file called "index.js" containing the example server provided by "NodeJS Express" (pasted in below). https://expressjs.com/en/starter/hello-world.html 
+1. To make a connection test application, add a file called "index.js" containing the example server provided by "Node.js Express" (pasted in below). https://expressjs.com/en/starter/hello-world.html 
 1. For editing JS, I recommend using Visual Studio Code - https://code.visualstudio.com/ 
 1. VS Code can create files directly from the commandline - so if you are in the correct folder, running `code index.js` will create the file and start the editor in one go.
 ```
@@ -32,7 +32,7 @@ app.listen(3000, () => console.log('Example app listening on port 3000!'))
 1. Change to the Server/HelloWorldServer folder - most likely it's called "/volume1/server/HelloWorldServer" or something similar, so the command would be: ```cd /volume1/server/HelloWorldServer```
 1. If your Node installation is complete - you should be able to use npm to install the dependiencies.
 1. Type the commands: ```npm init --yes``` - to init the project with all default values. ```npm install express --save``` to install and save the Express server dependency
-1. Start the NodeJS project: ```node .``` (Using . will execute the default start-document "index.js")
+1. Start the Node project: ```node .``` (Using . will execute the default start-document "index.js")
 1. You should see a message saying "Example app listening on port 3000!"
 1. In your browser you should now be able to access the app using the URL: ```http://[ip-of-your-NAS]:3000``` (3000 being the Port your Express server is listening to) 
 
@@ -45,7 +45,7 @@ app.listen(3000, () => console.log('Example app listening on port 3000!'))
 1. For me the "forever"-binary was located in `/volume1/@appstore/Node.js_v8/usr/local/lib/node_modules/forever/bin` it might be different for you. You will need to close you shell and re-open it to use the changes in the PATH variable.
 1. For general filemanagement and editing I recommend installing and using "Midnight Commander" from https://synocommunity.com/. (Installation instructions are on the site) When it's installed start it using ```sudo mc```.
 
-### Restart the NodeJS server after each NAS restart (recommended)
+### Restart the Node.js server after each NAS restart (recommended)
 It's possible to access the server manually each time we restart or update, but ideally we would like to be able to restart and update and have our Node server start up along side everything else.
 1. Create a file in `/volume1/server` called ```nodeserverstart.sh``` with the content:
 ```
@@ -114,8 +114,8 @@ When developing your NodeJS application you will often need to make changes, thu
 
 A good indication that a process is still running in the background is the error `EADDRINUSE`. Which indicated that the system still thinks there is a process listening to the specified port.  
 
-### Running the NodeJS REST service on port 80 using a custom subdomain name (optional):
-Theoretically you could run everything through the NodeJS server. Even serving static files etc. Thus eliminating the need for another webserver completely. But the built-in Nginx server does offer a lot of flexiblility and ease-of-use that, in NodeJS, would require in a lot of custom code to route everything coming in on port 80 to the correct place. So I'll assume you want to use the standard Nginx webserver in the "Web Station"-package for serving PHP- and static files. We will also be using the Nginx server to route the traffic to the correct NodeJS application based on the requested host-header.
+### Running the Node.js REST service on port 80 using a custom subdomain name (optional):
+Theoretically you could run everything through the Node.js server. Even serving static files etc. Thus eliminating the need for another webserver completely. But the built-in Nginx server does offer a lot of flexiblility and ease-of-use that, in Node, would require in a lot of custom code to route everything coming in on port 80 to the correct place. So I'll assume you want to use the standard Nginx webserver in the "Web Station"-package for serving PHP- and static files. We will also be using the Nginx server to route the traffic to the correct Node application based on the requested host-header.
 
 1. If you don't have a domain, or your DNS information has not yet propagated, you can edit this file: PC: ```C:\Windows\System32\drivers\etc\hosts``` using Notepad in Admin mode (or just use VS Code). On Mac open a concole and use: ```sudo nano /etc/hosts```
     1. Add a line to the file: ```[SynologyIP] [subdomain.domain.com]```
@@ -133,8 +133,8 @@ Theoretically you could run everything through the NodeJS server. Even serving s
     * You can now enter the URL: ```http://rest.thierry.com``` in your browser and acceess the HelloWorldServer running on port 3000.  
     
 ### Next step
-Well, now you have a stable HelloWorld server running, you can update and restart your server without killing your appliction - and a MySQL database service with no databases (that doesn't do anything yet). You can go on to all the great articles about how to program NodeJS services like this one by Avanthika Meenakshi: https://medium.com/@avanthikameenakshi/building-restful-api-with-nodejs-and-mysql-in-10-min-ff740043d4be 
+Well, now you have a stable HelloWorld server running, you can update and restart your server without killing your appliction - and a MySQL database service with no databases (that doesn't do anything yet). You can go on to all the great articles about how to program Node.js services like this one by Avanthika Meenakshi: https://medium.com/@avanthikameenakshi/building-restful-api-with-nodejs-and-mysql-in-10-min-ff740043d4be 
 
 
-### Are you new to NodeJS
-If you've gotten this far, then probably not. But just in case, check out my very basic tutorial project: https://github.com/StephanThierry/node-tutorialgallery that explains some of the basic concepts of setting a NodeJS server inside a functioning (ugly) app. Don't use this project for it's amazing features, but for the comments that go with each line of the server application, explaining what they do and why. 
+### Are you new to Node.js
+If you've gotten this far, then probably not. But just in case, check out my very basic tutorial project: https://github.com/StephanThierry/node-tutorialgallery that explains some of the basic concepts of setting a Node.js server inside a functioning (ugly) app. Don't use this project for it's amazing features, but for the comments that go with each line of the server application, explaining what they do and why. 
