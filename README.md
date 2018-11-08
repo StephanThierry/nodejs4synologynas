@@ -83,7 +83,8 @@ case "$1" in
 Instead of using one script to take care of both stop and start - and relying on the Linux automation of the `rc.d` folder it's possible to use the Synology "Control Panel -> Task Scheduler" 
 
 
-1. Create the script `nodeserverstart.sh` below and place it in a folder for example: `/volume1/server/autorun/`    
+1. Create the script `nodeserverstart.sh` below and place it in a folder for example: `/volume1/server/autorun/`   
+1. Make the script executable: `sudo chmod +x /volume1/server/autorun/nodeserverstart.sh`  
     ```shell
     #!/bin/sh
     PATH=$PATH:/volume1/@appstore/Node.js_v8/usr/local/lib/node_modules/forever/bin
@@ -92,6 +93,7 @@ Instead of using one script to take care of both stop and start - and relying on
     ```
 
 1. Then, create the script `nodeserverstop.sh` below and place it in a folder for example: `/volume1/server/autorun/`    
+1. Make that script executable too: `sudo chmod +x /volume1/server/autorun/nodeserverstop.sh`  
     ```shell
     #!/bin/sh
 
