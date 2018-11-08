@@ -77,6 +77,37 @@ case "$1" in
 1. Run the command ```sudo chmod +x /usr/local/etc/rc.d/nodeserverstart.sh``` to make the script executable, otherwise it won't actually be executed. 
 1. You should now be able to restart your server and the bootscript will make sure the service is started.
 
+**However...**  
+...this approach might not always work. So there is an alternative solution which was provided to me by Stephen Hamilton (https://github.com/pieshop)   
+
+Instead of using one script to take care of both stop and start - and relying on the Linux automation of the `rc.d` folder it's possible to use the Synology "Control Panel -> Task Scheduler" 
+
+
+1. Create the script ´nodeserverstart.sh´ below and place it in a folder for example: ´/volume1/server/autorun/´    
+```shell
+#!/bin/sh
+PATH=$PATH:/volume1/@appstore/Node.js_v8/usr/local/lib/node_modules/forever/bin
+
+forever start /volume1/server/HelloWorldServer -l /volume1/server/HelloWorldServer/logs/log.txt  -o /volume1/server/HelloWorldServer/logs/output.txt
+```
+
+1. Then, create the script ´nodeserverstop.sh´ below and place it in a folder for example: ´/volume1/server/autorun/´    
+
+```shell
+#!/bin/sh
+
+killall -9 node
+```
+
+1. Login into DSM and goto  "Control Panel -> Task Scheduler"  
+1. Create -> Triggered Task (User:root, Event:Boot-up)
+   *. Run command : `sh /volume1/server/autorun/nodeserverstart.sh`  
+
+1. Create -> Triggered Task (User:root, Event:Shutdown)
+   *. Run command : sh /volume1/server/autorun/nodeserverstop.sh
+
+This has the added benefit of being able to start/stop the Node server via the DSM GUI.
+
 ### Stopping Node
 When developing your NodeJS application you will often need to make changes, thus stopping and starting the service. The easiest is to keep the Node process in the shell so you can close it easily. But if you need to stop a "forever"-Node process it should be enough to run `sudo forever stopall`  but that might not always be the case. Sometimes you need to use a more drastic appraoch and use the command `sudo killall -9 node` to be sure all node-processes are stopped.  
 
