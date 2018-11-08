@@ -47,7 +47,7 @@ app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 ### Restart the Node.js server after each NAS restart (recommended)
 It's possible to access the server manually each time we restart or update, but ideally we would like to be able to restart and update and have our Node server start up along side everything else.
-1. Create a file in `/volume1/server` called ```nodeservercontrol.sh``` with the content:
+1. Create a file in `/volume1/server` called ```nodeservercontrol.sh``` with the content: (Located in the repo ´/scripts´)
 ```
 #!/bin/sh
 PATH=$PATH:/volume1/@appstore/Node.js_v8/usr/local/lib/node_modules/forever/bin
