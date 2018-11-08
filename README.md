@@ -80,7 +80,7 @@ case "$1" in
 **However...**  
 ...this approach might not always work. So there is an alternative solution which was provided to me by Stephen Hamilton (https://github.com/pieshop)   
 
-Instead of using one script to take care of both stop and start - and relying on the Linux automation of the `rc.d` folder it's possible to use the Synology "Control Panel -> Task Scheduler" 
+Instead of using one script to take care of both stop and start - and relying on the Linux automation of the `rc.d` folder it's possible to use the Synology "Control Panel -> Task Scheduler" (Both scripts mentioned are in the `/scripts/autorun` folder of the repo)  
 
 
 1. Create the script `nodeserverstart.sh` below and place it in a folder for example: `/volume1/server/autorun/`   
