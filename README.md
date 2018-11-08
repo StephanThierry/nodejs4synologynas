@@ -47,7 +47,7 @@ app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 ### Restart the Node.js server after each NAS restart (recommended)
 It's possible to access the server manually each time we restart or update, but ideally we would like to be able to restart and update and have our Node server start up along side everything else.
-1. Create a file in `/volume1/server` called ```nodeserverstart.sh``` with the content:
+1. Create a file in `/volume1/server` called ```nodeservercontrol.sh``` with the content:
 ```
 #!/bin/sh
 PATH=$PATH:/volume1/@appstore/Node.js_v8/usr/local/lib/node_modules/forever/bin
@@ -73,8 +73,8 @@ case "$1" in
 ```
 1. Check the "PATH" statement in the above script and make sure the binaries of your version of "forever" is in that folder. It might change depending on you version of Node or forever. Correct it, if it is not accurate.  
 1. Copy this file into the folder ```/usr/local/etc/rc.d``` "rc.d" means run commands directory, and contains customs scrips that will be executed with a "start" parameter at boot and a "stop" parameter at shutdown of the NAS.
-1. Using the command `sudo cp /volume1/server/nodeserverstart.sh /usr/local/etc/rc.d` will copy the script.
-1. Run the command ```sudo chmod +x /usr/local/etc/rc.d/nodeserverstart.sh``` to make the script executable, otherwise it won't actually be executed. 
+1. Using the command `sudo cp /volume1/server/nodeservercontrol.sh /usr/local/etc/rc.d` will copy the script.
+1. Run the command ```sudo chmod +x /usr/local/etc/rc.d/nodeservercontrol.sh``` to make the script executable, otherwise it won't actually be executed. 
 1. You should now be able to restart your server and the bootscript will make sure the service is started.
 
 **However...**  
