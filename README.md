@@ -84,20 +84,19 @@ Instead of using one script to take care of both stop and start - and relying on
 
 
 1. Create the script `nodeserverstart.sh` below and place it in a folder for example: `/volume1/server/autorun/`    
-```shell
-#!/bin/sh
-PATH=$PATH:/volume1/@appstore/Node.js_v8/usr/local/lib/node_modules/forever/bin
+    ```shell
+    #!/bin/sh
+    PATH=$PATH:/volume1/@appstore/Node.js_v8/usr/local/lib/node_modules/forever/bin
 
-forever start /volume1/server/HelloWorldServer -l /volume1/server/HelloWorldServer/logs/log.txt  -o /volume1/server/HelloWorldServer/logs/output.txt
-```
+    forever start /volume1/server/HelloWorldServer -l /volume1/server/HelloWorldServer/logs/log.txt  -o /volume1/server/HelloWorldServer/logs/output.txt
+    ```
 
 1. Then, create the script `nodeserverstop.sh` below and place it in a folder for example: `/volume1/server/autorun/`    
+    ```shell
+    #!/bin/sh
 
-```shell
-#!/bin/sh
-
-killall -9 node
-```
+    killall -9 node
+    ```
 
 1. Login into DSM and goto  "Control Panel -> Task Scheduler"  
 1. Create -> Triggered Task (User:root, Event:Boot-up)  
