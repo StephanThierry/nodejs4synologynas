@@ -53,7 +53,8 @@ It's possible to access the server manually each time we restart or update, but 
 PATH=$PATH:/volume1/@appstore/Node.js_v8/usr/local/lib/node_modules/forever/bin
 
 start() {
-        forever start /volume1/server/HelloWorldServer -l /volume1/server/HelloWorldServer/logs/log.txt  -o /volume1/server/HelloWorldServer/logs/output.txt
+        forever start --workingDir /volume1/server/HelloWorldServer --sourceDir /volume1/server/HelloWorldServer -l /volume1/server/HelloWorldServer/logs/log.txt -o /volume1/server/HelloWorldServer/logs/output.txt .
+
 }
 
 stop() {
@@ -71,6 +72,8 @@ case "$1" in
     echo "Usage: $0 {start|stop}"
 
 ```
+> Improvements to forever command provided by [Nedguy](https://github.com/nedguy)  
+
 1. Check the "PATH" statement in the above script and make sure the binaries of your version of "forever" is in that folder. It might change depending on you version of Node or forever. Correct it, if it is not accurate.  
 1. Copy this file into the folder ```/usr/local/etc/rc.d``` "rc.d" means run commands directory, and contains customs scrips that will be executed with a "start" parameter at boot and a "stop" parameter at shutdown of the NAS.
 1. Using the command `sudo cp /volume1/server/nodeservercontrol.sh /usr/local/etc/rc.d` will copy the script.
@@ -92,7 +95,6 @@ Instead of using one script to take care of both stop and start - and relying on
     forever start --workingDir /volume1/server/HelloWorldServer --sourceDir /volume1/server/HelloWorldServer -l /volume1/server/HelloWorldServer/logs/log.txt -o /volume1/server/HelloWorldServer/logs/output.txt .
     
     ```
-> Improvements to forever command provided by [Nedguy](https://github.com/nedguy)  
 
 1. Then, create the script `nodeserverstop.sh` below and place it in a folder for example: `/volume1/server/autorun/`    
 1. Make that script executable too: `sudo chmod +x /volume1/server/autorun/nodeserverstop.sh`  
