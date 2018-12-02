@@ -72,7 +72,7 @@ case "$1" in
     echo "Usage: $0 {start|stop}"
 
 ```
-> Improvements to forever command provided by [Nedguy](https://github.com/nedguy)  
+> Improvements to forever command-call provided by [Nedguy](https://github.com/nedguy)  
 
 1. Check the "PATH" statement in the above script and make sure the binaries of your version of "forever" is in that folder. It might change depending on you version of Node or forever. Correct it, if it is not accurate.  
 1. Copy this file into the folder ```/usr/local/etc/rc.d``` "rc.d" means run commands directory, and contains customs scrips that will be executed with a "start" parameter at boot and a "stop" parameter at shutdown of the NAS.
