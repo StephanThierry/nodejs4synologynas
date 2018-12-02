@@ -89,8 +89,10 @@ Instead of using one script to take care of both stop and start - and relying on
     #!/bin/sh
     PATH=$PATH:/volume1/@appstore/Node.js_v8/usr/local/lib/node_modules/forever/bin
 
-    forever start /volume1/server/HelloWorldServer -l /volume1/server/HelloWorldServer/logs/log.txt  -o /volume1/server/HelloWorldServer/logs/output.txt
+    forever start --workingDir /volume1/server/HelloWorldServer --sourceDir /volume1/server/HelloWorldServer -l /volume1/server/HelloWorldServer/logs/log.txt -o /volume1/server/HelloWorldServer/logs/output.txt .
+    
     ```
+> Improvements to forever command provided by [Nedguy](https://github.com/nedguy)  
 
 1. Then, create the script `nodeserverstop.sh` below and place it in a folder for example: `/volume1/server/autorun/`    
 1. Make that script executable too: `sudo chmod +x /volume1/server/autorun/nodeserverstop.sh`  
