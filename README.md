@@ -47,6 +47,9 @@ app.listen(3000, () => console.log('Example app listening on port 3000!'))
 
 ### Restart the Node.js server after each NAS restart (recommended)
 It's possible to access the server manually each time we restart or update, but ideally we would like to be able to restart and update and have our Node server start up along side everything else.
+
+**Notice!** When using a Windows based editor like VS Code - make sure to check that all script files are saved in Linux (LF) format and NOT in Windows (CRLF) format. In VS Code you can view (and change) the line-end format by clicking the "CRLF" icon in the lower right corner of the editor.  If you save scripts in CRLF format you could get the error:  ```“$'\r': command not found”``` meaning Linux does not know that to do with the CR (aka. \r) char at the end of each line.      
+
 1. Create a file in `/volume1/server` called ```nodeservercontrol.sh``` with the content: (Located in the repo `/scripts`)
 ```
 #!/bin/sh
