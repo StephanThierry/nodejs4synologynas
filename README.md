@@ -73,6 +73,7 @@ case "$1" in
     ;;
   *)
     echo "Usage: $0 {start|stop}"
+esac
 
 ```
 > Improvements to forever command-call provided by [Nedguy](https://github.com/nedguy)  
