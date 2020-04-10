@@ -55,7 +55,7 @@ app.listen(3000, () => console.log('Example app listening on port 3000!'))
 1. If you are getting an error: `bash: forever: command not found` check that forever is installed with the "-g" (global) option
 1. If you have installed forever globally, and you are still seeing this error. Edit the `/etc/profile` file and add the full path to the forever binary to the PATH statement in you boot-profile. You can use the built-in editor "vim". `sudo vim /etc/profile`  
 1. For me the "forever"-binary was located in `/volume1/@appstore/Node.js_v8/usr/local/lib/node_modules/forever/bin` it might be different for you. You will need to close you shell and re-open it to use the changes in the PATH variable.
-1. Note. Each directory in the PATH is seperated by `:`. 
+1. Note. Each directory in the PATH is seperated by `:`. Be sure to type in the folder name that contains the executable - not the name of the executable it self.
 1. For general filemanagement and editing I recommend installing and using "Midnight Commander" from https://synocommunity.com/. (Installation instructions are on the site) When it's installed start it using ```sudo mc```.
 
 ### Restart the Node.js server after each NAS restart (recommended)
