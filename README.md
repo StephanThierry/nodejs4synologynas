@@ -8,7 +8,7 @@ You may get this error when using npm:
 
 The issue is that the `zlib` package is at version 1.2.8 and to be compatible with Node v12 it has to be 1.2.11+  
 Since `zlib` is a core package in DSM - I don't know of a safe way to update it, and the workaround is not pretty - but here goes:  
-Uninstall (the order is important): `Moments`,  `Synology Drive Server`, `Synology Application Service` and then `Node v12`  
+Uninstall (in this order): `Moments`,  `Synology Drive Server`, `Synology Application Service` and then `Node v12`  
 When only Node v8 (or earlier) are installed - you should be good to go.  
 
 If you have found a better solution - or you can confirm that Synology has fixed the issue - please let me know by creating an issue. https://github.com/StephanThierry/nodejs4synologynas/issues    
