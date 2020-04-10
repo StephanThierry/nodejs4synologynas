@@ -2,6 +2,16 @@
 ### Running a REST server on Synology NAS using Node.js and MariaDB (MySQL)  
 `Searchterms: NodeJS service on Synology NAS, Running Node.JS on Synology NAS, Node on Synology NAS.`
 
+NOTE! 
+**There is currently a problem with Node.js on Synology.**  
+You may get this error when using npm:  `npm ERR! zlib: invalid distance too far back`   
+The issue is that the zlib package is at version 1.2.8 and to be compatible with Node v12 it has to be 1.2.11+  
+Since `zlib` is a core package in DSM - I don't know of a safe way to update it, and the workaround is not pretty - but here goes:  
+Uninstall (the order is important): `Moments`,  `Synology Drive Server`, `Synology Application Service` and then `Node v12`  
+If only Node v8 and earlier are installed - you should be good to go.  
+NOTE! 
+
+
 There are a lot of good resources out there for Node.js services that do just about anything. So in this project I will be focusing on all the [yak-shaving](https://en.wiktionary.org/wiki/yak_shaving) that goes into making the whole setup actually work. When everything is running it's up to you to make something useful. This guide should work on most Synology NAS servers from the smallest ones with an old ARM processer and 512MB RAM like the DS214se, to the larger versions with a newer Intel CPU and +4GB RAM like the DS918+. 
 
 The purpose of this project is to explain all the steps to get Node.js up and running on your Synology NAS and to keep it running
