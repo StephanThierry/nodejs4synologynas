@@ -24,7 +24,7 @@ Node v12 is selected as the default version but you have Node 8.9.4 installed. T
 `nvm set 8.9.4`  
 npm install will now start working again.  
 
-I've reported this error to Synology technical support - and they have replied that is is a know issue - and users should use nvm to switch to Node v8 if they want to use Node for development!  My guess is that Node v12 will be supported in a later version of DSM.  
+I've reported this error to Synology technical support - and they have replied that it is a know issue - and users should use nvm to switch to Node v8 if they want to use Node for development!  My guess is that Node v12 will be supported in a later version of DSM.  
 
 If you have found a better solution - or you can confirm that Synology has fixed the issue - please let me know by creating an issue. https://github.com/StephanThierry/nodejs4synologynas/issues    
 (Now on with the show....)  
