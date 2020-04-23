@@ -2,16 +2,28 @@
 ### Running a REST server on Synology NAS using Node.js and MariaDB (MySQL)  
 `Searchterms: NodeJS service on Synology NAS, Running Node.JS on Synology NAS, Node on Synology NAS.`
 
-**There is currently a problem with Node.js on Synology.**  
+**There is currently a problem with Node.js v12 on Synology.**  
 You may get this error when using npm:   
 `npm ERR! zlib: invalid distance too far back`     
 
 The issue is that the `zlib` package is at version 1.2.8 and to be compatible with Node v12 it has to be 1.2.11+  
-Since `zlib` is a core package in DSM - I don't know of a safe way to update it, and the workaround is not pretty - but here goes:  
-Uninstall (in this order): `Moments`,  `Synology Drive Server`, `Synology Application Service` and then `Node v12`  
-When only Node v8 (or earlier) is/are installed - you should be good to go. 
+Since `zlib` is a core package in DSM - I don't know of a safe way to update it, BUT you can safely use Node v8 even is Node v12 is installed:  
 
-I've reported this error to Synology technical support - and they seem to be looking at it.  Who knows!  
+* Option 1 is to uninstall (in this order): `Moments`,  `Synology Drive Server`, `Synology Application Service` and then `Node v12`  
+When only Node v8 (or earlier) is/are installed - Node v8 will automatically be used.   
+OR!
+* Option 2 is to use nvm:
+
+In SSH type `nvm` - you should see something like this:  
+```
+  ο 12.14.0
+    4.8.7
+    8.9.4
+```
+Node v12 is selected as the default version but you have Node 8.9.4 installed. To switch to that simply type:  
+`nvm set 8.9.4`  
+
+I've reported this error to Synology technical support - and they have replied that is is a know issue - and users should use nvm if they want to use Node for development!  
 
 If you have found a better solution - or you can confirm that Synology has fixed the issue - please let me know by creating an issue. https://github.com/StephanThierry/nodejs4synologynas/issues    
 (Now on with the show....)  
