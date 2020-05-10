@@ -7,7 +7,7 @@ You may get this error when using npm:
 `npm ERR! zlib: invalid distance too far back`     
 
 The issue is that the `zlib` package is at version 1.2.8 and to be compatible with Node v12 it has to be 1.2.11+  
-Since `zlib` is a core package in DSM - I don't know of a safe way to update it, BUT you can safely use Node v8 even is Node v12 is installed:  
+Since `zlib` is a core package in DSM - I don't know of a safe way to update it, BUT you can safely use Node v8 even if Node v12 is installed:  
 
 * Option 1 is to uninstall (in this order): `Moments`,  `Synology Drive Server`, `Synology Application Service` and then `Node v12`  
 When only Node v8 (or earlier) is/are installed - Node v8 will automatically be used.   
