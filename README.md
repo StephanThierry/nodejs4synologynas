@@ -21,7 +21,7 @@ In SSH type `nvm` - you should see something like this:
     8.9.4
 ```
 Node v12 is selected as the default version but you have Node 8.9.4 installed. To switch to that simply type:  
-`nvm set 8.9.4`  
+`sudo nvm set 8.9.4`  
 npm install will now start working again.  
 
 I've reported this error to Synology technical support - and they have replied that it is a know issue - and users should use nvm to switch to Node v8 if they want to use Node for development!  My guess is that Node v12 will be supported in a later version of DSM.  
