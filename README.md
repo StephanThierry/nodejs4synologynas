@@ -2,33 +2,6 @@
 ### Running a REST server on Synology NAS using Node.js and MariaDB (MySQL)  
 `Searchterms: NodeJS service on Synology NAS, Running Node.JS on Synology NAS, Node on Synology NAS.`
 
-**There is currently a problem with Node.js v12 on Synology.**  
-You may get this error when using npm:   
-`npm ERR! zlib: invalid distance too far back`     
-
-The issue is that the `zlib` package is at version 1.2.8 and to be compatible with Node v12 it has to be 1.2.11+  
-Since `zlib` is a core package in DSM - I don't know of a safe way to update it, BUT you can safely use Node v8 even if Node v12 is installed:  
-
-* Option 1 is to uninstall (in this order): `Moments`,  `Synology Drive Server`, `Synology Application Service` and then `Node v12`  
-When only Node v8 (or earlier) is/are installed - Node v8 will automatically be used.   
-OR!
-* Option 2 is to use nvm:
-
-In SSH type `nvm` - you should see something like this:  
-```
-  ο 12.14.0
-    4.8.7
-    8.9.4
-```
-Node v12 is selected as the default version but you have Node 8.9.4 installed. To switch to that simply type:  
-`sudo nvm set 8.9.4`  
-npm install will now start working again.  
-
-I've reported this error to Synology technical support - and they have replied that it is a know issue - and users should use nvm to switch to Node v8 if they want to use Node for development!  My guess is that Node v12 will be supported in a later version of DSM.  
-
-If you have found a better solution - or you can confirm that Synology has fixed the issue - please let me know by creating an issue. https://github.com/StephanThierry/nodejs4synologynas/issues    
-(Now on with the show....)  
-
 There are a lot of good resources out there for Node.js services that do just about anything. So in this project I will be focusing on all the [yak-shaving](https://en.wiktionary.org/wiki/yak_shaving) that goes into making the whole setup actually work. When everything is running it's up to you to make something useful. This guide should work on most Synology NAS servers from the smallest ones with an old ARM processer and 512MB RAM like the DS214se, to the larger versions with a newer Intel CPU and +4GB RAM like the DS918+. 
 
 The purpose of this project is to explain all the steps to get Node.js up and running on your Synology NAS and to keep it running
