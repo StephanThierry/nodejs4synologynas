@@ -119,6 +119,10 @@ Instead of using one script to take care of both stop and start - and relying on
 
 This has the added benefit of being able to start/stop the Node server via the DSM GUI.
 
+### Maintenance
+If you have a service that runs for a log time you may need to delete the logfiles from `/root/.forever`.  
+When/if your root partition fills up several NAS features will stop working and when trying to run the latest DSM update you'll get this message: `Insufficient system capacity for update`.  Because of partitioning ,even as little as 600 MB of logs can cause these problems no matter the total size of your storage-volume.  
+
 ### Stopping Node
 When developing your NodeJS application you will often need to make changes, thus stopping and starting the service. The easiest is to keep the Node process in the shell so you can close it easily. But if you need to stop a "forever"-Node process it should be enough to run `sudo forever stopall`  but that might not always be the case. Sometimes you need to use a more drastic appraoch and use the command `sudo killall -9 node` to be sure all node-processes are stopped.  
 
