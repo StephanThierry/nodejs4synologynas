@@ -154,7 +154,7 @@ This guide assumes you have already:
 
 The process consistes of 3 steps:  
 a) Create a certificate  
-b) Create a Reverse proxy to the Node.js applicateion  
+b) Create a Reverse proxy to the Node.js application  
 c) Link the certificate to the Reverse Proxy  
 
 *a)* In "Control Panel":  
