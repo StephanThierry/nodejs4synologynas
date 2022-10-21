@@ -148,9 +148,9 @@ Theoretically you could run everything through the Node.js server. Even serving 
 
 ### Enabeling SSL/TLS (https) on your website      
 This guide assumes you have already:   
-    1. Purchased a domain   
-    1. Pointed the correct DNS records to the external IP of your network  
-    1. Made changes to firewall/router to route traffic on specific ports (like 80/443) to the local IP of your Synology NAS  
+1. Purchased a domain   
+1. Pointed the correct DNS records to the external IP of your network  
+1. Made changes to firewall/router to route traffic on specific ports (like 80/443) to the local IP of your Synology NAS  
 
 The process consistes of 3 steps:  
 a) Create a certificate  
