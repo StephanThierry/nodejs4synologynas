@@ -145,7 +145,53 @@ Theoretically you could run everything through the Node.js server. Even serving 
     * Destination ```http://localhost:3000``` this is the target your host address will be pointing to. Localhost is the name of the NAS itself, :3000 is the port your Node server application is listening to.  
     * This config will re-route all Port 80 traffic (default http port) sent to your source hostname to port 3000 of the NAS  
     * You can now enter the URL: ```http://rest.thierry.com``` in your browser and acceess the HelloWorldServer running on port 3000.  
-    
+
+### Enabeling SSL/TLS (https) on your website      
+This guide assumes you have already:   
+    1. Purchased a domain   
+    1. Pointed the correct DNS records to the external IP of your network  
+    1. Made changes to firewall/router to route traffic on specific ports (like 80/443) to the local IP of your Synology NAS  
+
+The process consistes of 3 steps:  
+a) Create a certificate  
+b) Create a Reverse proxy to the Node.js applicateion  
+c) Link the certificate to the Reverse Proxy  
+
+*a)* In "Control Panel":  
+Go to: `Security`, navigate to the `Certificate`-tab.  
+ 1. Click `[Add]`  
+ 1. `Add a new certificate` is already selected so click `[Next]`  
+ 1. Select `Get a certificate from Let's Encrypt` (A free service that provides certificates)    
+ 1. Enter your Domain name, for example `mydomain.dom`   
+ 1. Enter your email so you are notified if the certificate renewal fails  
+ 1. Enter all the subdomains the certificate should work for sepereted by `;` - for example: `rest.mydomain.com;www.mydomain.com`  
+ 1. Click `[Next]` 
+
+*b)* In "Control Panel":   
+Go to "Login Portal", navigate to the "Advanced"-tab and click the [Reverse proxy] button. 
+ 1. Click `[Create]`  
+ 1. In `Revers proxy name` enter any description. For easy refereance use the full domain name - for example `rest.mydomain.com`  
+ 
+ Source: (What the outside world should see)   
+ 1. In `Protocol` select `HTTPS`  
+ 1. In `Hostname` type the full domain name - for example `rest.mydomain.com`   
+ 1. In `Port` type 443  
+ 
+ Destination (Your Node.js application): 
+ 1. In `Protocol` select `HTTP`  
+ 1. In `Hostname` type the `localhost`   
+ 1. In `Port` type the port your Node.js application  - for example `3000`  
+ 1. Click `[Save]` 
+
+*c)* In "Control Panel":  
+Go to: `Security`, navigate to the `Certificate`-tab.  
+1. Select your certificate, for example `mydomain.com`  
+1. Click `[Settings]`  
+1. In the "Configure"-tab scroll down to the name of the reverse proxy, for example: `rest.mydomain.com` 
+1. In the drowdown to the right - select the correct certificate
+1. Click `[Ok]`  
+
+
 ### Next step
 Well, now you have a stable HelloWorld server running, you can update and restart your server without killing your appliction - and a MySQL database service with no databases (that doesn't do anything yet). You can go on to all the great articles about how to program Node.js services like this one by Avanthika Meenakshi: https://medium.com/@avanthikameenakshi/building-restful-api-with-nodejs-and-mysql-in-10-min-ff740043d4be 
 
