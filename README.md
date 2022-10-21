@@ -138,7 +138,7 @@ Theoretically you could run everything through the Node.js server. Even serving 
 1. Install the "Web Station" package. 
 1. Goto Main Menu - "Web Station". 
     1. In General Settings - make sure you are using HTTP back-end server: "Nginx"
-1. A standard website would be served using the Virtual Host setting in the Webserver, but your NodeJS services should be configured using the "Reverse proxy" settings in "Control Panel > Application Portal > Reverse Proxy"
+1. A standard website would be served using the Virtual Host setting in the Webserver, but your NodeJS services should be configured using the "Reverse proxy" settings in "Control Panel > Login Portal > Advanced > Reverse Proxy" (In older versions of DSM it's located in: "Control Panel > Application Portal > Reverse Proxy")  
 1.    Click Create and fill in the form.   
     * Description: Any description you'd like,   
     * Source: Your desired hostname (see above) f.x. ```http://rest.thierry.com```  
@@ -157,18 +157,18 @@ a) Create a certificate
 b) Create a Reverse proxy to the Node.js application  
 c) Link the certificate to the Reverse Proxy  
 
-*a)* In "Control Panel":  
+**a)** In "Control Panel":  
 Go to: `Security`, navigate to the `Certificate`-tab.  
  1. Click `[Add]`  
  1. `Add a new certificate` is already selected so click `[Next]`  
  1. Select `Get a certificate from Let's Encrypt` (A free service that provides certificates)    
  1. Enter your Domain name, for example `mydomain.dom`   
  1. Enter your email so you are notified if the certificate renewal fails  
- 1. Enter all the subdomains the certificate should work for sepereted by `;` - for example: `rest.mydomain.com;www.mydomain.com`  
+ 1. Enter all the subdomains the certificate should work for seperated by `;` - for example: `mydomain.com;www.mydomain.com;rest.mydomain.com`  
  1. Click `[Next]` 
 
-*b)* In "Control Panel":   
-Go to "Login Portal", navigate to the "Advanced"-tab and click the [Reverse proxy] button. 
+**b)** In "Control Panel":   
+Go to `Login Portal`, navigate to the "Advanced"-tab and click the `[Reverse proxy]` button. 
  1. Click `[Create]`  
  1. In `Revers proxy name` enter any description. For easy refereance use the full domain name - for example `rest.mydomain.com`  
  
@@ -183,11 +183,11 @@ Go to "Login Portal", navigate to the "Advanced"-tab and click the [Reverse prox
  1. In `Port` type the port your Node.js application  - for example `3000`  
  1. Click `[Save]` 
 
-*c)* In "Control Panel":  
+**c)** In "Control Panel":  
 Go to: `Security`, navigate to the `Certificate`-tab.  
 1. Select your certificate, for example `mydomain.com`  
 1. Click `[Settings]`  
-1. In the "Configure"-tab scroll down to the name of the reverse proxy, for example: `rest.mydomain.com` 
+1. In the `Configure`-tab scroll down to the name of the reverse proxy, for example: `rest.mydomain.com` 
 1. In the drowdown to the right - select the correct certificate
 1. Click `[Ok]`  
 
