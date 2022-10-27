@@ -179,8 +179,8 @@ Go to `Login Portal`, navigate to the "Advanced"-tab and click the `[Reverse pro
  
  Destination (Your Node.js application): 
  1. In `Protocol` select `HTTP`  
- 1. In `Hostname` type the `localhost`   
- 1. In `Port` type the port your Node.js application  - for example `3000`  
+ 1. In `Hostname` type `localhost`  
+ 1. In `Port` type the port your Node.js application listens to - for example `3000`  
  1. Click `[Save]` 
 
 **c)** In "Control Panel":  
