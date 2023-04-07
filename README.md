@@ -135,7 +135,7 @@ Open DMS in the browser.
 * Click `[Create] > Scheduled task > User-defined Script`
 * Fill out the form:
    * Task: Clean forever log
-   * Task Settings: `User-defined script´:  ´bash /volume1/server/scripts/clean_forever_log.sh`
+   * Task Settings: `User-defined script`:  `bash /volume1/server/scripts/clean_forever_log.sh`
    * Set internal to what ever you thing is necessary - for example once pr. week or once pr. month
 
 ### Stopping Node
