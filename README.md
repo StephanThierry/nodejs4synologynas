@@ -58,7 +58,7 @@ It's possible to access the server manually each time we restart or update, but 
 PATH=$PATH:/volume1/@appstore/Node.js_v8/usr/local/lib/node_modules/forever/bin
 
 start() {
-        forever start --workingDir /volume1/server/HelloWorldServer --sourceDir /volume1/server/HelloWorldServer -l /volume1/server/HelloWorldServer/logs/log.txt -o /volume1/server/HelloWorldServer/logs/output.txt .
+        forever start --workingDir /volume1/server/HelloWorldServer --sourceDir /volume1/server/HelloWorldServer -l /volume1/server/HelloWorldServer/logs/log.txt -a -o /volume1/server/HelloWorldServer/logs/output.txt .
 
 }
 
@@ -98,7 +98,7 @@ Instead of using one script to take care of both stop and start - and relying on
     #!/bin/sh
     PATH=$PATH:/volume1/@appstore/Node.js_v8/usr/local/lib/node_modules/forever/bin
 
-    forever start --workingDir /volume1/server/HelloWorldServer --sourceDir /volume1/server/HelloWorldServer -l /volume1/server/HelloWorldServer/logs/log.txt -o /volume1/server/HelloWorldServer/logs/output.txt .
+    forever start --workingDir /volume1/server/HelloWorldServer --sourceDir /volume1/server/HelloWorldServer -l /volume1/server/HelloWorldServer/logs/log.txt -a -o /volume1/server/HelloWorldServer/logs/output.txt .
     
     ```
 
