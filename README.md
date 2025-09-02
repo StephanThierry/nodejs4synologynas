@@ -8,7 +8,7 @@ The purpose of this project is to explain all the steps to get Node.js up and ru
 even after the server is restarted.
 
 1. Start by logging into DSM and going to Package Manager  
-    1. Install the "Node.js v8" package or whichever is the lateste at the time. (On older version of DSM it might be located under "Developer Tools", the latest version just has an "All packages" tab.)
+    1. Install the "Node.js" package. Pick the latest version - or a specific version if you're installing an legacy application. (On older version of DSM it might be located under "Developer Tools", the latest version just has an "All packages" tab.)
     1. Install the "MariaDB" package, any version shold be fine, just be aware that version 5 uses the default MySQL port (3306) and version 10 uses 3307. So when using v10, you'll need to specify the port on all connections.  (Used to be under "Utilities")
     
 1. Still in DSM. Goto Control Panel, and in the File Sharing section select "Shared Folder".
